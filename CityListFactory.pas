@@ -1,0 +1,35 @@
+unit CityListFactory;
+
+interface
+
+uses
+  CityListInterface;
+
+///////////////////////////////////////////////////////////////////////////////
+
+type
+  TCityListKind = (cmReal, cmFake);
+
+function CreateCityList(AKind: TCityListKind = cmReal): ICityList;
+
+///////////////////////////////////////////////////////////////////////////////
+
+implementation
+
+uses
+  CityListModel, CityListModelFake;
+
+///////////////////////////////////////////////////////////////////////////////
+
+function CreateCityList(AKind: TCityListKind): ICityList;
+begin
+  case AKind of
+    cmFake: Result := TCityListModelFake.Create;
+  else
+    Result := TCityList.Create;
+  end;
+end;
+
+///////////////////////////////////////////////////////////////////////////////
+
+end.
